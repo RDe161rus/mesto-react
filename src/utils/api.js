@@ -76,11 +76,10 @@ class Api {
     }).then(this._handleResponse)
   }
 }
-const api = new Api({
+export const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-72',
   headers: {
     authorization: '87d63540-4095-4028-b72b-2672dee97eab',
     'Content-Type': 'application/json'
   }
 });
-export default api;
