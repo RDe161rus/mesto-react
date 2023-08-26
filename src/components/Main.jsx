@@ -42,8 +42,9 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
           type="button"
         ></button>
       </section>
-      
-      <Card cards={cards} onCardClick={onCardClick}/>
+      <section className="elements">
+      {cards.map((card) =>  (<Card key={card._id} card={card} onCardClick={onCardClick} />))}
+    </section>
     </main>
   );
 }
