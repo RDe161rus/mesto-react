@@ -6,21 +6,21 @@ class Api {
 
   _handleResponse(res) {
     if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`)
+      return Promise.reject(`Ошибка: ${res.status}`);
     }
-    return res.json()
+    return res.json();
   }
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   editUserInfo(data) {
@@ -31,7 +31,7 @@ class Api {
         name: data.name,
         about: data.about
       })
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   addCards(data) {
@@ -42,28 +42,28 @@ class Api {
         name: data.name,
         link: data.link
       })
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   like(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   dislike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 
   editAvatar(data) {
@@ -73,7 +73,7 @@ class Api {
       body: JSON.stringify({
         avatar: data.avatar
       })
-    }).then(this._handleResponse)
+    }).then(this._handleResponse);
   }
 }
 export const api = new Api({

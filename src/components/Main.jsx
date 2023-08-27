@@ -1,29 +1,34 @@
 import { useEffect, useState } from 'react';
-import {api} from '../utils/api';
+import { api } from './api';
 import Card from './Card';
 
-export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
-  const [data, setData] = useState('')
+export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+  const [data, setData] = useState({});
   const [cards, setCards] = useState([]);
-  
+
   useEffect(() => {
-    api.getUserInfo().then(data => {
-      setData(data)  
-    })
-    api.getInitialCards().then((data) => {
-    setCards(data)  
-  })
-  }, []) 
+    api
+      .getUserInfo()
+      .then(data => {
+        setData(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    api
+      .getInitialCards()
+      .then(data => {
+        setCards(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__profile-group">
-          <img
-            onClick={onEditAvatar}
-            className="profile__avatar"
-            src={data.avatar}
-            alt="аватар"
-          />
+          <img onClick={onEditAvatar} className="profile__avatar" src={data.avatar} alt="аватар" />
           <div className="profile__profile-info">
             <h1 className="profile__title">{data.name}</h1>
             <button
@@ -43,8 +48,10 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
         ></button>
       </section>
       <section className="elements">
-      {cards.map((card) =>  (<Card key={card._id} card={card} onCardClick={onCardClick} />))}
-    </section>
+        {cards.map(card => (
+          <Card key={card._id} card={card} onCardClick={onCardClick} />
+        ))}
+      </section>
     </main>
   );
 }

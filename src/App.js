@@ -6,18 +6,17 @@ import PopupWithForm from './components/PopupWithForm';
 import ImagePopup from './components/ImagePopup';
 import { useState } from 'react';
 function App() {
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
 
-  const closeAllPopups = () =>{
+  const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
-  }
+    setSelectedCard({ name: '', link: '' });
+  };
 
   return (
     <div className="page">
@@ -78,13 +77,14 @@ function App() {
         />
         <span className="form__input-error text-input-error"></span>
       </PopupWithForm>
-      <PopupWithForm 
+      <PopupWithForm
         isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups }
-        id="item-popup" 
-        title="Новое место" 
-        buttonText="Сохранить" 
-        name="addCards">
+        onClose={closeAllPopups}
+        id="item-popup"
+        title="Новое место"
+        buttonText="Сохранить"
+        name="addCards"
+      >
         <input
           id="name-item-input"
           type="text"
@@ -106,16 +106,8 @@ function App() {
         />
         <span className="form__input-error text-item-input-error"></span>
       </PopupWithForm>
-      <PopupWithForm
-        id="confirm-popup"
-        title="Вы уверены?"
-        buttonText="Да"
-        name="addCards"
-      ></PopupWithForm>
-      <ImagePopup 
-        card={selectedCard}
-        onClose={closeAllPopups}
-      />
+      <PopupWithForm id="confirm-popup" title="Вы уверены?" buttonText="Да" name="addCards" />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
   );
 }
