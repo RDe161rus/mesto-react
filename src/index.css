@@ -9,6 +9,7 @@
 @import url("./blocks/profile/profile.css");
 @import url("./blocks/profile/__add-button/profile__add-button.css");
 @import url("./blocks/profile/__avatar/profile__avatar.css");
+@import url("./blocks/profile/__overlay/profile__overlay.css");
 @import url("./blocks/profile/__edit-button/profile__edit-button.css");
 @import url("./blocks/profile/__profile-group/profile__profile-group.css");
 @import url("./blocks/profile/__profile-info/profile__profile-info.css");
@@ -51,3 +52,7 @@
 
 @import url("./blocks/like-counter/like-counter.css");
 @import url("./blocks/like-counter/__card/like-counter__card.css");
+
+
+
+

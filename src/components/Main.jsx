@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api } from './api';
+import { api } from '../utils/api';
 import Card from './Card';
 
 export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
@@ -28,7 +28,15 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
     <main className="main">
       <section className="profile">
         <div className="profile__profile-group">
-          <img onClick={onEditAvatar} className="profile__avatar" src={data.avatar} alt="аватар" />
+          <div className="profile__overlay">
+            <img
+              onClick={onEditAvatar}
+              className="profile__avatar"
+              src={data.avatar}
+              alt="аватар"
+            />
+          </div>
+
           <div className="profile__profile-info">
             <h1 className="profile__title">{data.name}</h1>
             <button
