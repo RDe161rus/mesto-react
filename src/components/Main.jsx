@@ -1,29 +1,17 @@
-import { useEffect, useState } from 'react';
-import { api } from '../utils/api';
+import { useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [data, setData] = useState({});
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then(data => {
-        setData(data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-    api
-      .getInitialCards()
-      .then(data => {
-        setCards(data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }, []);
+export default function Main({
+  cards,
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onCardLike,
+  onCardDelete
+}) {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <main className="main">
       <section className="profile">
@@ -32,20 +20,20 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
             <img
               onClick={onEditAvatar}
               className="profile__avatar"
-              src={data.avatar}
+              src={currentUser.avatar}
               alt="аватар"
             />
           </div>
 
           <div className="profile__profile-info">
-            <h1 className="profile__title">{data.name}</h1>
+            <h1 className="profile__title">{currentUser.name}</h1>
             <button
               onClick={onEditProfile}
               id="opened-popup-btn"
               className="profile__edit-button"
               type="button"
             ></button>
-            <p className="profile__text">{data.about}</p>
+            <p className="profile__text">{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -55,11 +43,20 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
           type="button"
         ></button>
       </section>
-      <section className="elements">
-        {cards.map(card => (
-          <Card key={card._id} card={card} onCardClick={onCardClick} />
-        ))}
-      </section>
+      <CurrentUserContext.Provider value={cards}>
+        <section className="elements">
+          {cards.map(card => (
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              currentUser={currentUser}
+              onCardDelete={onCardDelete}
+            />
+          ))}
+        </section>
+      </CurrentUserContext.Provider>
     </main>
   );
 }
