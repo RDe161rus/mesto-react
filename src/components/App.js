@@ -65,11 +65,11 @@ function App() {
       .editUserInfo(data)
       .then(data => {
         setCurrentUser(data);
+        setIsEditProfilePopupOpen(false);
       })
       .catch(err => {
         console.error(err);
       });
-    setIsEditProfilePopupOpen(false);
   }
   //
   function handleUpdateAvatar(data) {
@@ -77,11 +77,11 @@ function App() {
       .editAvatar(data)
       .then(data => {
         setCurrentUser(data);
+        setIsEditAvatarPopupOpen(false);
       })
       .catch(err => {
         console.error(err);
       });
-    setIsEditAvatarPopupOpen(false);
   }
   //
   function handleAddPlaceSubmit(data) {
@@ -89,11 +89,11 @@ function App() {
       .addCards(data)
       .then(data => {
         setCards([data, ...cards]);
+        setIsAddPlacePopupOpen(false);
       })
       .catch(err => {
         console.error(err);
       });
-    setIsAddPlacePopupOpen(false);
   }
   //
   const closeAllPopups = () => {

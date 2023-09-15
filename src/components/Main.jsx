@@ -43,7 +43,6 @@ export default function Main({
           type="button"
         ></button>
       </section>
-      <CurrentUserContext.Provider value={cards}>
         <section className="elements">
           {cards.map(card => (
             <Card
@@ -56,7 +55,6 @@ export default function Main({
             />
           ))}
         </section>
-      </CurrentUserContext.Provider>
     </main>
   );
 }
